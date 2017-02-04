@@ -9,7 +9,7 @@
 int main(int argc, char **argv)
 {
 	struct mosquitto *bee;
-	int a,ret;
+	int ret;
 	char *on="alive";
 	char *off="down";
 	char **tb;

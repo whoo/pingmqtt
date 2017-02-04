@@ -32,7 +32,7 @@ void*	get(char *tb[],json_object *obj)
 {
 
 	json_object *tmp;
-	int type;
+//	int type;
 	tmp=obj;
 
 					int a=0;
