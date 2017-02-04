@@ -1,2 +1,2 @@
-AUTOMAKE_OPTIONS = foreign add-missing
+AUTOMAKE_OPTIONS = foreign 
 SUBDIRS = src
