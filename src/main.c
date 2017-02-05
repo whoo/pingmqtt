@@ -76,6 +76,21 @@ int mainloop()
 int main(int argc, char **argv)
 {
 
+
+
+int pid = fork();
+
+
+  if (pid == -1)  
+        return -1;  
+    else if (pid != 0)  
+        exit (EXIT_SUCCESS);
+
+open ("/dev/null", O_RDWR);
+dup (0);  
+dup (0);  
+
+
 return mainloop();
 }
 
