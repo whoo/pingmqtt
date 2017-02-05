@@ -26,7 +26,7 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 
 # Checks for library functions.
-AC_CHECK_FUNCS([alarm gethostbyname memset select socket strerror])
+AC_CHECK_FUNCS([alarm memset select socket strerror fork getaddrinfo])
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])
