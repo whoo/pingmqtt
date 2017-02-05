@@ -2,7 +2,7 @@
 #include <mosquitto.h>
 #include "ping.h"
 #include "json.h"
-
+#include "tcp.h"
 
 
 
@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 {
 	struct mosquitto *bee;
 	int ret;
+	int tm_wait;
 	char *on="alive";
 	char *off="down";
 	char **tb;
@@ -22,7 +23,8 @@ int main(int argc, char **argv)
 
 
 
-
+	tm_wait=(int)get((char *[]){"sleep",NULL},jobj);
+	
 	bee=mosquitto_new("elementDD",0,NULL);
 	mosquitto_username_pw_set(bee,
 			(char*) get((char *[]){"server","user",NULL},jobj),
@@ -34,26 +36,30 @@ int main(int argc, char **argv)
 			(int)  get((char *[]){"server","port",NULL},jobj),
 			120);
 
-
-
 	tb=(char **) get((char *[]){"hosts",NULL},jobj);
 
-	for(int a=0; tb[a];a++) {
+	while (1)
+	{
 
-		sprintf(hostname,"ping/%s",tb[a]);
+		for(int a=0; tb[a];a++) {
 
+			sprintf(hostname,"ping/%s",tb[a]);
 
-		if (ping(tb[a])==0)
+			if (pingTCP(tb[a]))
 			{
-		printf("host [%s] ok\n",hostname); 
-			mosquitto_publish(bee,&ret,hostname,strlen(on),on,0,0);
+	//			printf("host [%s] ok\n",hostname); 
+				mosquitto_publish(bee,&ret,hostname,strlen(on),on,0,0);
 			}
-		else
-			mosquitto_publish(bee,&ret,hostname,strlen(off),off,0,0);
+			else
+				mosquitto_publish(bee,&ret,hostname,strlen(off),off,0,0);
 
-	usleep(250*1000);
+			alarm(0);
+			//	usleep(250*1000);
+
+		}
+
+		sleep(tm_wait);
 	}
-
 
 
 

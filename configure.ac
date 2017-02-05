@@ -9,6 +9,7 @@ AM_INIT_AUTOMAKE([pingmqtt], [1.0])
 #AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
+AC_CONFIG_SRCDIR([src])
 AC_PROG_CC
 
 # Checks for libraries.
@@ -18,15 +19,16 @@ AC_CHECK_LIB([mosquitto], [mosquitto_connect])
 AC_CHECK_LIB([mosquitto], [mosquitto_publish])
 
 # Checks for header files.
-AC_CHECK_HEADERS([arpa/inet.h netdb.h stdlib.h string.h unistd.h])
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h netdb.h stdlib.h string.h sys/socket.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 
 # Checks for library functions.
-AC_CHECK_FUNCS([alarm gethostbyname memset socket])
+AC_CHECK_FUNCS([alarm gethostbyname memset select socket strerror])
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])
 AC_OUTPUT
+
