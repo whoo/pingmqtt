@@ -6,8 +6,10 @@
 
 
 
-int main(int argc, char **argv)
+
+int mainloop()
 {
+
 	struct mosquitto *bee;
 	int ret;
 	int tm_wait;
@@ -64,10 +66,16 @@ int main(int argc, char **argv)
 
 
 
-
 	mosquitto_disconnect(bee);
 	mosquitto_lib_cleanup();
 
-
 	return 0;
 }
+
+
+int main(int argc, char **argv)
+{
+
+return mainloop();
+}
+
