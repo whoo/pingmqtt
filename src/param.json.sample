@@ -1,0 +1,10 @@
+{
+"sleep": 60,
+"server": {
+	"port": 1883,
+	"mosquitto":"broker",
+	"user":"username",
+	"password":"secret"
+	},
+"hosts": [ "bberry", "srv", "iPhone" ]
+}
